@@ -41,7 +41,7 @@ export default function Navigation() {
           <span className="material-symbols-outlined select-none" style={{ fontVariationSettings: "'FILL' 0" }}>
             account_circle
           </span>
-          <span className="text-lg font-semibold tracking-tight text-on-surface">Portfolio</span>
+          <span className="text-lg font-semibold tracking-tight text-on-surface">Abhishek</span>
         </Link>
 
         {/* Desktop Nav */}
