@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: "home" },
@@ -15,27 +15,33 @@ export default function Navigation() {
   const pathname = usePathname();
   const [showSettings, setShowSettings] = useState(false);
   const [accentColor, setAccentColor] = useState("indigo"); // indigo, violet, emerald
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
-  const getAccentClass = (color: string) => {
-    switch (color) {
-      case "violet":
-        return "text-[#7c3aed]";
-      case "emerald":
-        return "text-[#10b981]";
-      default:
-        return "text-primary";
+  // Sync theme with DOM and localStorage on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(savedTheme);
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initialTheme = prefersDark ? "dark" : "light";
+      setTheme(initialTheme);
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(initialTheme);
     }
-  };
+  }, []);
 
   return (
     <>
       {/* Top App Bar (Desktop & Mobile header) */}
-      <header className="w-full top-0 sticky z-50 bg-background flex items-center justify-between px-6 py-4 shadow-[6px_6px_12px_rgba(0,0,0,0.08),-6px_-6px_12px_rgba(255,255,255,0.6)]">
+      <header className="w-full top-0 sticky z-50 bg-background flex items-center justify-between px-6 py-4 neomorph-raised">
         <Link href="/" className="flex items-center gap-3 p-2 rounded-xl neomorph-raised text-primary transition-all duration-200 active:shadow-neomorph-inset active:scale-98">
           <span className="material-symbols-outlined select-none" style={{ fontVariationSettings: "'FILL' 0" }}>
             account_circle
           </span>
-          <span className="text-lg font-semibold tracking-tight text-on-surface">Abhishek</span>
+          <span className="text-lg font-semibold tracking-tight text-on-surface">Portfolio</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -48,7 +54,7 @@ export default function Navigation() {
                 href={item.href}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-[#e8eaf0] text-primary shadow-neomorph-raised"
+                    ? "bg-background text-primary shadow-neomorph-raised"
                     : "text-on-surface-variant hover:text-on-surface"
                 }`}
               >
@@ -77,11 +83,14 @@ export default function Navigation() {
               <span className="material-symbols-outlined text-sm select-none">close</span>
             </button>
             <h3 className="text-lg font-bold text-on-surface">Theme Settings</h3>
+            
+            {/* Accent Color Selection */}
             <div className="space-y-3">
               <p className="text-sm font-medium text-on-surface-variant">Accent Color</p>
               <div className="flex gap-4 justify-around">
                 <button
                   onClick={() => {
+                    document.documentElement.style.setProperty("--primary", "#6366f1");
                     document.documentElement.style.setProperty("--color-primary", "#6366f1");
                     setAccentColor("indigo");
                   }}
@@ -92,6 +101,7 @@ export default function Navigation() {
                 />
                 <button
                   onClick={() => {
+                    document.documentElement.style.setProperty("--primary", "#7c3aed");
                     document.documentElement.style.setProperty("--color-primary", "#7c3aed");
                     setAccentColor("violet");
                   }}
@@ -102,6 +112,7 @@ export default function Navigation() {
                 />
                 <button
                   onClick={() => {
+                    document.documentElement.style.setProperty("--primary", "#10b981");
                     document.documentElement.style.setProperty("--color-primary", "#10b981");
                     setAccentColor("emerald");
                   }}
@@ -112,6 +123,42 @@ export default function Navigation() {
                 />
               </div>
             </div>
+
+            {/* Appearance (Light / Dark Mode) Selection */}
+            <div className="space-y-3 pt-4 border-t border-outline-variant/30">
+              <p className="text-sm font-medium text-on-surface-variant">Appearance</p>
+              <div className="grid grid-cols-2 gap-4">
+                <button
+                  onClick={() => {
+                    setTheme("light");
+                    localStorage.setItem("theme", "light");
+                    document.documentElement.classList.remove("dark");
+                    document.documentElement.classList.add("light");
+                  }}
+                  className={`py-2.5 px-4 rounded-xl neomorph-raised neomorph-btn flex items-center justify-center gap-2 text-sm font-semibold transition-all cursor-pointer ${
+                    theme === "light" ? "text-primary neomorph-inset" : "text-on-surface"
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-base select-none">light_mode</span>
+                  Light
+                </button>
+                <button
+                  onClick={() => {
+                    setTheme("dark");
+                    localStorage.setItem("theme", "dark");
+                    document.documentElement.classList.remove("light");
+                    document.documentElement.classList.add("dark");
+                  }}
+                  className={`py-2.5 px-4 rounded-xl neomorph-raised neomorph-btn flex items-center justify-center gap-2 text-sm font-semibold transition-all cursor-pointer ${
+                    theme === "dark" ? "text-primary neomorph-inset" : "text-on-surface"
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-base select-none">dark_mode</span>
+                  Dark
+                </button>
+              </div>
+            </div>
+
             <div className="pt-2 border-t border-outline-variant/30 text-center">
               <button
                 onClick={() => setShowSettings(false)}
