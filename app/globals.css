@@ -1,51 +1,131 @@
 @import "tailwindcss";
 
-@theme {
-  --color-background: #e8eaf0;
-  --color-on-surface: #2e3040;
-  --color-on-surface-variant: #585a68;
-  --color-primary: #6366f1;
-  --color-secondary: #6c6e7e;
-  --color-tertiary: #7c3aed;
+:root {
+  --background: #e8eaf0;
+  --on-surface: #2e3040;
+  --on-surface-variant: #585a68;
+  --primary: #6366f1;
+  --secondary: #6c6e7e;
+  --tertiary: #7c3aed;
   
-  --color-surface-container-lowest: #f0f2f8;
-  --color-surface-container-low: #e5e7ed;
-  --color-surface-container: #e2e4ea;
-  --color-surface-container-high: #dcdee4;
-  --color-surface-container-highest: #d6d8de;
-  --color-surface-tint: #6366f1;
-  --color-surface-variant: #dcdee4;
-  --color-surface: #e8eaf0;
-  --color-surface-bright: #edeef4;
-  --color-surface-dim: #d4d6dc;
+  --surface-container-lowest: #f0f2f8;
+  --surface-container-low: #e5e7ed;
+  --surface-container: #e2e4ea;
+  --surface-container-high: #dcdee4;
+  --surface-container-highest: #d6d8de;
+  --surface-tint: #6366f1;
+  --surface-variant: #dcdee4;
+  --surface: #e8eaf0;
+  --surface-bright: #edeef4;
+  --surface-dim: #d4d6dc;
   
-  --color-on-primary-container: #e0e2ff;
-  --color-primary-container: #818cf8;
-  --color-on-secondary-container: #585a68;
-  --color-secondary-container: #d8dae6;
-  --color-on-tertiary-container: #3b1f63;
-  --color-tertiary-container: #a78bfa;
+  --on-primary-container: #e0e2ff;
+  --primary-container: #818cf8;
+  --on-secondary-container: #585a68;
+  --secondary-container: #d8dae6;
+  --on-tertiary-container: #3b1f63;
+  --tertiary-container: #a78bfa;
   
-  --color-error: #dc2626;
-  --color-error-container: #fee2e2;
-  --color-on-error-container: #991b1b;
+  --error: #dc2626;
+  --error-container: #fee2e2;
+  --on-error-container: #991b1b;
   
-  --color-outline: #8a8c9a;
-  --color-outline-variant: #d0d2dc;
+  --outline: #8a8c9a;
+  --outline-variant: #d0d2dc;
   
   --shadow-neomorph-raised: 6px 6px 12px rgba(0, 0, 0, 0.08), -6px -6px 12px rgba(255, 255, 255, 0.6);
   --shadow-neomorph-inset: inset 4px 4px 8px rgba(0, 0, 0, 0.06), inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+  
+  --scrollbar-thumb: #d1d5db;
+  --scrollbar-track: #e8eaf0;
+}
+
+.dark {
+  --background: #181920;
+  --on-surface: #e2e4ea;
+  --on-surface-variant: #8a8c9a;
+  --primary: #818cf8;
+  --secondary: #a5a7b7;
+  --tertiary: #a78bfa;
+  
+  --surface-container-lowest: #0c0d12;
+  --surface-container-low: #121318;
+  --surface-container: #1b1c23;
+  --surface-container-high: #24252f;
+  --surface-container-highest: #2d2f3a;
+  --surface-tint: #818cf8;
+  --surface-variant: #24252f;
+  --surface: #181920;
+  --surface-bright: #20222a;
+  --surface-dim: #101115;
+  
+  --on-primary-container: #e0e2ff;
+  --primary-container: #4338ca;
+  --on-secondary-container: #b8baca;
+  --secondary-container: #2e3040;
+  --on-tertiary-container: #ede9fe;
+  --tertiary-container: #5b21b6;
+  
+  --error: #f87171;
+  --error-container: #7f1d1d;
+  --on-error-container: #fca5a5;
+  
+  --outline: #585a68;
+  --outline-variant: #2e3040;
+  
+  --shadow-neomorph-raised: 6px 6px 12px rgba(0, 0, 0, 0.35), -6px -6px 12px rgba(255, 255, 255, 0.04);
+  --shadow-neomorph-inset: inset 4px 4px 8px rgba(0, 0, 0, 0.3), inset -4px -4px 8px rgba(255, 255, 255, 0.03);
+  
+  --scrollbar-thumb: #374151;
+  --scrollbar-track: #181920;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-tint: var(--surface-tint);
+  --color-surface-variant: var(--surface-variant);
+  --color-surface: var(--surface);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-dim: var(--surface-dim);
+  
+  --color-on-primary-container: var(--on-primary-container);
+  --color-primary-container: var(--primary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-tertiary-container: var(--tertiary-container);
+  
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+  
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  
+  --shadow-neomorph-raised: var(--shadow-neomorph-raised);
+  --shadow-neomorph-inset: var(--shadow-neomorph-inset);
   
   --font-plus-jakarta: "Plus Jakarta Sans", sans-serif;
 }
 
 body {
-  background-color: #e8eaf0;
-  color: #2e3040;
+  background-color: var(--background);
+  color: var(--on-surface);
   font-family: var(--font-plus-jakarta);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
-  scrollbar-color: #d0d2dc #e8eaf0;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   scrollbar-width: thin;
 }
 
@@ -56,21 +136,21 @@ body {
   }
 
   body::-webkit-scrollbar-thumb {
-    background: #d1d5db;
+    background: var(--scrollbar-thumb);
     border-radius: 10px;
   }
 
   body::-webkit-scrollbar-track {
-    background: #e8eaf0;
+    background: var(--scrollbar-track);
   }
 }
 
 .neomorph-raised {
-  box-shadow: 6px 6px 12px rgba(0,0,0,0.08), -6px -6px 12px rgba(255,255,255,0.6);
+  box-shadow: var(--shadow-neomorph-raised);
 }
 
 .neomorph-inset {
-  box-shadow: inset 4px 4px 8px rgba(0,0,0,0.06), inset -4px -4px 8px rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-neomorph-inset);
 }
 
 .neomorph-btn {
@@ -78,6 +158,6 @@ body {
 }
 
 .neomorph-btn:active {
-  box-shadow: inset 4px 4px 8px rgba(0,0,0,0.06), inset -4px -4px 8px rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-neomorph-inset);
   transform: scale(0.98);
 }
